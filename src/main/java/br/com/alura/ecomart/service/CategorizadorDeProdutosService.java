@@ -4,12 +4,12 @@ import br.com.alura.ecomart.ai.ContarTokens;
 import br.com.alura.ecomart.ai.SeletorModeloChat;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 @Service
@@ -47,6 +47,7 @@ public class CategorizadorDeProdutosService {
                 .options(OpenAiChatOptions.builder()
                         .temperature(0.85)
                         .build())
+                .advisors(new SimpleLoggerAdvisor())
                 .call()
                 .content();
     }
