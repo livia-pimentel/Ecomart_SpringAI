@@ -4,6 +4,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.DefaultChatOptionsBuilder;
 import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,14 +17,12 @@ public class CategorizadorDeProdutosController {
     private final ChatClient chatClient;
 
     // Construtor
-    public CategorizadorDeProdutosController(ChatClient.Builder chatClientBuilder) {
-        this.chatClient = chatClientBuilder
-                .defaultOptions(OpenAiChatOptions.builder()
-                        .model("gpt-4o")
-                        .temperature(0.85)
-                        .build())
-                .build();
+    public CategorizadorDeProdutosController(
+            @Qualifier("gpt-4o") ChatClient chatClient) {
+
+        this.chatClient = chatClient;
     }
+
 
     // Metodos
     @GetMapping
@@ -50,8 +49,8 @@ public class CategorizadorDeProdutosController {
                 .system(system)
                 .user(produto)
                 .options(OpenAiChatOptions.builder()
-                        .temperature(0.75)
-                        .model("gpt-4o-mini")
+                        .temperature(0.85)
+                        .model("gpt-4o")
                         .build())
                 .call()
                 .content();

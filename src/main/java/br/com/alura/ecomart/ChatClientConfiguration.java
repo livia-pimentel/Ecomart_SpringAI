@@ -16,6 +16,7 @@ public class ChatClientConfiguration {
                 .defaultOptions(OpenAiChatOptions
                         .builder()
                         .model("gpt-4o-mini")
+                        .temperature(0.75)
                         .build())
                 .build();
     }
