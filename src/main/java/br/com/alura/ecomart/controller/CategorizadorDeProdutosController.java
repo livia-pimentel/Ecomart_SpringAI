@@ -17,7 +17,12 @@ public class CategorizadorDeProdutosController {
 
     // Construtor
     public CategorizadorDeProdutosController(ChatClient.Builder chatClientBuilder) {
-        this.chatClient = chatClientBuilder.build();
+        this.chatClient = chatClientBuilder
+                .defaultOptions(OpenAiChatOptions.builder()
+                        .model("gpt-4o")
+                        .temperature(0.85)
+                        .build())
+                .build();
     }
 
     // Metodos
@@ -45,7 +50,7 @@ public class CategorizadorDeProdutosController {
                 .system(system)
                 .user(produto)
                 .options(OpenAiChatOptions.builder()
-                        .temperature(0.85)
+                        .temperature(0.75)
                         .model("gpt-4o-mini")
                         .build())
                 .call()
