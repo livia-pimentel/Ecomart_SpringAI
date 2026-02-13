@@ -46,6 +46,7 @@ public class CategorizadorDeProdutosController {
                 .user(produto)
                 .options(OpenAiChatOptions.builder()
                         .temperature(0.85)
+                        .model("gpt-4o-mini")
                         .build())
                 .call()
                 .content();
