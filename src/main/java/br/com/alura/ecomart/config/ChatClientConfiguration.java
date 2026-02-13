@@ -1,0 +1,32 @@
+package br.com.alura.ecomart.config;
+
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ChatClientConfiguration {
+
+    @Bean(name = "gpt-4o-mini")
+    public ChatClient gpt4oMiniChatClient(ChatClient.Builder builder) {
+
+        return builder.defaultOptions(OpenAiChatOptions
+                        .builder()
+                        .model("gpt-4o-mini")
+                        .build())
+                .build();
+    }
+
+    @Bean(name = "gpt-4o")
+    public ChatClient full(ChatClient.Builder builder) {
+
+        return builder.defaultOptions(OpenAiChatOptions
+                .builder()
+                .model("gpt-4o")
+                .build())
+                .build();
+    }
+
+}
